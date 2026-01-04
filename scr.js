@@ -294,3 +294,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
+const craftsmanshipVideo = document.querySelector(".craftsmanship-video");
+
+const observer = new IntersectionObserver(
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      craftsmanshipVideo.play();
+      craftsmanshipVideo.style.opacity = "1";
+    } else {
+      craftsmanshipVideo.pause();
+      craftsmanshipVideo.style.opacity = "0";
+    }
+  },
+  { threshold: 0.4 }
+);
+
+observer.observe(craftsmanshipVideo);
+
+
+const footerVideo = document.querySelector(".final-video");
+
+const footerObserver = new IntersectionObserver(
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      footerVideo.play();
+      footerVideo.style.opacity = "1";
+    } else {
+      footerVideo.pause();
+      footerVideo.style.opacity = "0";
+    }
+  },
+  { threshold: 0.35 }
+);
+
+footerObserver.observe(footerVideo);
+

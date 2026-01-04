@@ -182,7 +182,17 @@
    
   </section>
   <section class="craftsmanship-video-section">
-    <video src="craftsmanship-video.mp4" class="craftsmanship-video" autoplay muted loop playsinline preload="metadata"></video>
+    <video
+  class="craftsmanship-video"
+  muted
+  loop
+  playsinline
+  preload="none"
+  poster="./craftsmanship-background.png"
+>
+  <source src="craftsmanship-video.webm" type="video/webm">
+  <source src="craftsmanship-video.mp4" type="video/mp4">
+</video>
 </section>
 
 
@@ -219,9 +229,18 @@
 
 
 <section class="final-emotion-section">
-  <video class="final-video" autoplay muted loop playsinline>
-    <source src="footer-video.mp4" type="video/mp4" />
-  </video>
+  <video
+  class="final-video"
+  muted
+  loop
+  playsinline
+  preload="none"
+  poster="./signature-background.png"
+>
+  <source src="footer-video.webm" type="video/webm">
+  <source src="footer-video.mp4" type="video/mp4">
+</video>
+
 
   <div class="final-overlay"></div>
 
