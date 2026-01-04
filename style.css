@@ -1,0 +1,868 @@
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0b0b0b;
+  color: #e6e2d8;
+  font-family: 'Neue Montreal Mono', monospace;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* ===================== NAVIGATION ===================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  z-index: 3000;
+  padding: 20px 8vw;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.nav-link {
+  color: #e6e2d8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+  cursor: pointer; /* Visual feedback */
+}
+
+.nav-link:hover {
+  color: #c9a24d;
+}
+
+/* UPDATED: slightly reduce visual weight of nav brand so it doesn't compete with headline */
+.nav-brand {
+  font-size: 1.1rem; /* reduced from 1.2rem */
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  font-family: 'Cinzel', serif;
+  color: rgba(230, 226, 216, 0.92);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+.nav-menu a {
+  color: #e6e2d8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: #c9a24d;
+}
+
+.brand {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+}
+/* Hide mobile navigation by default (desktop) */
+.hamburger,
+.mobile-nav {
+  display: none;
+
+}
+
+
+/* ===================== BRAND INTRODUCTION ===================== */
+.brand-intro {
+  padding: 120px 8vw 80px;
+  background: #0b0b0b;
+  text-align: left;
+  padding-left: clamp(8vw, 12vw, 16vw);
+}
+
+.intro-content {
+  margin: 0 auto;
+  text-align: left;
+  color: #8c857a;
+  font-family: 'Pangaia', serif;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  max-width: 620px;
+  line-height: 1.9;
+  opacity: 0;
+}
+
+.intro-content p {
+  margin-bottom: 1.5em;
+}
+
+/* ===================== HERO ===================== */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background: #0b0b0b url('hero-background.png') center / cover no-repeat;
+}
+
+/* SUBTLE MICRO-ADJUSTMENTS */
+.hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 36%;
+  padding-left: 8vw;
+  transform: translateY(-3vh);
+}
+
+.hero-text .brand {
+  font-size: 0.9rem;
+  letter-spacing: 0.5em;
+  opacity: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  color: rgba(230, 226, 216, 0.9);
+}
+
+.brand,
+.headline-line,
+.hero-support {
+  opacity: 0;
+}
+.headline-1, .headline-2 {
+  display: block;
+  opacity: 0;
+}
+
+
+.hero-text .headline {
+  margin-top: 14px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: 0.045em;
+  font-family: 'Inter', sans-serif;
+}
+
+.hero-support {
+  margin-top: 10px;
+  color: #8c857a;
+  font-family: 'Pangaia', serif;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  opacity: 0;
+}
+
+/* ===================== HERO CTAs ===================== */
+.hero-ctas {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.hero-ctas .cta {
+  color: rgba(230, 226, 216, 0.94);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  padding: 0.42rem 0.85rem;
+  border: 1px solid rgba(201, 162, 77, 0.12);
+  background: transparent;
+  line-height: 1;
+  text-transform: uppercase;
+  opacity: 0.82;
+  transition: color 0.18s ease, opacity 0.18s ease, transform 0.12s ease;
+}
+
+.hero-ctas .cta:hover {
+  color: #c9a24d;
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.hero-ctas .cta-ghost {
+  font-size: 0.85rem;
+  opacity: 0.72;
+  border-color: rgba(230, 226, 216, 0.05);
+  color: rgba(230, 226, 216, 0.82);
+}
+
+
+
+/* ===================== SECTIONS ===================== */
+section {
+  padding: 120px 8vw;
+  scroll-margin-top: 100px;
+}
+
+
+
+
+
+/* ===================== COLLECTION ===================== */
+.collection-section {
+  position: relative;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  will-change: background-image;
+  height: 600vh;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1.8s ease-in-out;
+}
+
+.collection-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.collection-item {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8rem;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 1;
+  overflow: hidden;
+  contain: layout;
+}
+
+.collection-item.active {
+  opacity: 1;
+}
+
+.collection-section .collection-text {
+  z-index: 2;
+  color: #e6e2d8;
+  max-width: 40rem;
+}
+
+.collection-section .model-name {
+  opacity: 1 !important;
+  color: #e6e2d8;
+  font-size: 1.6rem;
+  letter-spacing: 0.22em;
+  margin: 0;
+}
+
+.collection-section .model-desc {
+  opacity: 1 !important;
+  color: #bfb6ab;
+  margin: 0.5rem 0 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.image-stack {
+  position: relative;
+  width: min(32vw, 26rem);
+  height: min(32vw, 26rem);
+  overflow: hidden;
+}
+
+.image-stack img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.image-stack img.active {
+  opacity: 1;
+}
+
+/* ===================== MOBILE ===================== */
+
+.model-name {
+  font-size: 1.4rem;
+  letter-spacing: 0.22em;
+  opacity: 0;
+  font-family: 'Pangaia', serif;
+}
+
+
+
+/* ----crafstmanship section---- */
+/* ---------------- CRAFTSMANSHIP - SEPARATE FRAMES ---------------- */
+/* -
+/* ---------------- CRAFTSMANSHIP - CLEAN VERSION ---------------- */
+/* ---------------- CRAFTSMANSHIP - PINNED IMAGE + OVERLAY ---------------- */
+.craftsmanship-section {
+    height: 300vh;  /* Extended for overlay scroll */
+    background: #0b0b0b;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+}
+
+
+/* Stage 1: Pinned Background Image */
+.craftsmanship-stage.image-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+}
+
+.craftsmanship-image {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Stage 2: Black Overlay Text (scrolls over image) */
+.craftsmanship-stage.text-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: rgba(11,11,11,0.82); 
+    backdrop-filter: blur(22px); /* Black overlay */
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+/* Text stage is pure black */
+
+
+.craftsmanship-text {
+    max-width: 42rem;
+    margin-left: 8vw;
+    padding-left: 10vw;
+    margin-right: auto;
+    padding: 0;
+    padding-right: 4vw;
+    color: #8c857a;  /* Bright text on dark overlay */
+    font-family: 'Pangaia', serif;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    text-align: left;
+}
+
+.craftsmanship-heading {
+    font-size: 2.6rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    color: #e6e2d8;
+    margin-bottom: 3.5rem;
+    font-family: 'Cinzel', serif;
+}
+
+/* Stage 3: Video */
+.craftsmanship-stage.video-stage {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.craftsmanship-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+
+
+
+
+
+/* Video is its own full-bleed frame AFTER text */
+.craftsmanship-video-section {
+  height: 100vh;
+  background: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.craftsmanship-text p {
+  color: rgba(230,226,216,0.65); /* instead of near-white */
+}
+
+
+.craftsmanship-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+/* Rest of CSS stays exactly the same */
+
+
+/* ===================== FOOTER ===================== */
+
+.footer-links-section {
+  background: #0b0b0b;
+  padding: 120px 8vw 100px;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.footer-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.45em;
+  color: #e6e2d8;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: rgba(230,226,216,0.85);
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: #c9a24d;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.75rem;
+  color: #8c857a;
+}
+
+.footer-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-meta a {
+  font-size: 0.75rem;
+  color: rgba(230,226,216,0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-meta a:hover {
+  color: #e6e2d8;
+}
+
+
+.final-emotion-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Background video */
+.final-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(7px);
+  transform: scale(1.06); /* prevents blur edges */
+  z-index: 0;
+}
+
+/* Dark overlay to soften motion */
+.final-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Content container */
+.final-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: 0 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #e6e2d8;
+}
+
+/* Brand */
+.final-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.45em;
+  margin-bottom: 2rem;
+  opacity: 0.85;
+}
+
+/* Emotional line */
+.final-text {
+  font-family: 'Pangaia', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.5;
+  max-width: 32rem;
+  margin: 0;
+}
+
+/* Patent / closing note */
+.final-meta {
+  margin-top: 2.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: rgba(230,226,216,0.6);
+}
+
+/* ===================== MOBILE (GLOBAL) ===================== */
+
+
+/* ======================================================
+   MOBILE & TABLET — FINAL LUXURY STYLES
+====================================================== */
+
+
+
+/* ======================================================
+   MOBILE — PRIMARY BREAKPOINT
+====================================================== */
+
+@media (max-width: 900px) {
+  .hero-ctas .cta,
+  .hero-ctas .cta-ghost {
+    font-size: 0.78rem;
+  }
+
+  .brand-intro {
+    padding: 80px 8vw 60px;
+  }
+
+  .brand-intro .intro-content {
+    max-width: calc(100% - 12vw);
+    margin-left: 6vw;
+    padding-right: 6vw;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* ---------- GLOBAL ---------- */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav-menu {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .navbar {
+    padding: 16px 8vw;
+    background: transparent;
+    backdrop-filter: none;
+  }
+  body.menu-open .navbar{
+    background: transparent;
+    backdrop-filter: none;
+
+  }  
+  
+  /* ---------- HAMBURGER ---------- */
+  .hamburger {
+    position: fixed;
+    top: 22px;
+    right: 6vw;
+    width: 26px;
+    height: 18px;
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 4000;
+    pointer-events: auto;
+  }
+  .nav-brand {
+    z-index: 1;
+    position: relative;
+  }
+
+  .hamburger span {
+    height: 1px;
+    width: 100%;
+    background: rgba(230,226,216,0.9);
+    transition: transform 0.35s ease, opacity 0.35s ease;
+  }
+
+  /* Transform to CLOSE (X) */
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* ---------- MOBILE NAV ---------- */
+
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.96);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    padding-top: 22vh;
+    padding-left: 10vw;
+    gap: 2.5rem;
+
+    /* 🔒 FULLY HIDDEN STATE */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateY(-100%);
+    transition:
+      transform 0.45s ease,
+      opacity 0.35s ease;
+
+    z-index: 2000;
+  }
+
+  .mobile-nav a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.35em;
+    color: #e6e2d8;
+    text-decoration: none;
+  }
+
+  /* 🔓 OPEN STATE */
+  .mobile-nav.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background-position: center 20%;
+    padding-top: 0;
+  }
+
+  .hero-text {
+    top: 28%;
+    max-width: 88%;
+    transform: none;
+  }
+
+
+  .hero {
+    padding-top: 0;
+  
+}
+
+
+  .hero-text .headline {
+    font-size: 2.1rem;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-support {
+    max-width: 32ch;
+  }
+
+  .hero-ctas {
+    margin-top: 1.8rem;
+  }
+
+  .hero-ctas .cta {
+    border: none;
+    padding: 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    opacity: 0.7;
+  }
+
+  /* ---------- BRAND INTRO ---------- */
+  .brand-intro .intro-content {
+    max-width: 46ch;
+    margin-left: 6vw;
+  }
+
+  /* ---------- COLLECTION ---------- */
+  .collection-section {
+    height: 700vh;
+  }
+
+  .collection-item {
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 6vw;
+  }
+
+  .collection-text {
+    margin-bottom: 2rem;
+  }
+
+  .image-stack {
+    width: 78vw;
+    height: 78vw;
+    margin-top: 2.5rem;
+  }
+
+  /* ---------- CRAFTSMANSHIP ---------- */
+
+  .craftsmanship-image {
+    object-position: center 30%;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+  
+
+  .craftsmanship-stage.text-stage {
+    position: sticky;
+    width: 100%;
+    top: 0;
+    height: 100vh;
+    min-height: 120vh;
+    background: #000;
+    padding: 15vh 6vw 12vh;
+    backdrop-filter: none;
+    align-items: flex-start;
+  }
+
+  .craftsmanship-text {
+    max-width: 44ch;
+    font-size: 0.95rem;
+  }
+
+  .craftsmanship-heading {
+    font-size: 0.85rem;
+    letter-spacing: 0.32em;
+    margin-bottom: 2rem;
+  }
+  .craftsmanship-video-section{
+    margin-top: 0;
+  }
+
+
+  .craftsmanship-section{
+    height: 320vh;
+  }
+  /* ---------- FINAL VIDEO ---------- */
+  .final-video {
+    filter: blur(4px);
+  }
+
+  .final-content {
+    padding: 0 6vw;
+  }
+
+  .final-text {
+    font-size: 1.6rem;
+  }
+
+  .final-brand {
+    font-size: 0.75rem;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .footer-links-section {
+    padding: 80px 6vw 70px;
+  }
+
+  .footer-inner {
+    gap: 2.5rem;
+  }
+
+  .footer-nav,
+  .footer-meta {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .footer-brand {
+    opacity: 0.6;
+  }
+}
+
+/* ======================================================
+   MOBILE REFINEMENT — LUXURY CLEANUP
+   (No values changed, only organized)
+====================================================== */
+
+/* ===================== INTRO TYPOGRAPHY ===================== */
+.brand-intro .intro-content {
+  max-width: 58ch;
+  margin-left: 10vw;
+  margin-right: auto;
+  text-align: left;
+  color: #8c857a;
+  font-family: 'Pangaia', serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.brand-intro .intro-content p {
+  margin: 0 0 1.75rem 0;
+}
+
+.brand-intro .intro-content .lead {
+  font-size: 1.125rem;
+  color: #a9a295;
+  font-weight: 400;
+}
+
+
+.hero{
+  padding: 0 !important;
+}
