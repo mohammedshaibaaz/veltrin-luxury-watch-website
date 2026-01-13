@@ -5,6 +5,21 @@
   box-sizing: border-box;
 }
 
+/* Image Loading Optimization */
+img {
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+img[loading="lazy"] {
+  opacity: 0.3;
+  filter: blur(8px);
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+  filter: blur(0);
+}
+
 body {
   background: #0b0b0b;
   color: #d4cfc4;

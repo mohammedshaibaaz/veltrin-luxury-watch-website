@@ -1,4 +1,31 @@
 (function () {
+  // ------------------ Image Loading Optimization ------------------
+  // Add smooth fade-in effect for lazy loaded images
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.complete) {
+            img.classList.add('loaded');
+          } else {
+            img.addEventListener('load', () => {
+              img.classList.add('loaded');
+            });
+          }
+        }
+      });
+    }, { rootMargin: '100px' });
+    
+    lazyImages.forEach(img => imageObserver.observe(img));
+  } else {
+    // Fallback for older browsers
+    lazyImages.forEach(img => {
+      img.addEventListener('load', () => img.classList.add('loaded'));
+    });
+  }
+
   // ------------------ GSAP animation micro-targets ------------------
   // Guard GSAP-specific code so it doesn't abort the rest of the script when GSAP is absent.
   if (typeof gsap !== 'undefined') {
