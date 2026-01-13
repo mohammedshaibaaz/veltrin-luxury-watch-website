@@ -1236,9 +1236,32 @@ a:focus {
 .form-error {
   display: block;
   color: #ff6b6b;
-  font-size: 0.85rem;
-  margin-top: 4px;
+  font-size: 0.82rem;
+  margin-top: 6px;
   min-height: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.form-error.show {
+  opacity: 1;
+}
+
+/* Input error state */
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: #ff6b6b !important;
+  background-color: rgba(255, 107, 107, 0.03);
+}
+
+.form-group input.error:focus,
+.form-group select.error:focus,
+.form-group textarea.error:focus {
+  border-color: #ff6b6b !important;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.1) !important;
 }
 
 .form-success {

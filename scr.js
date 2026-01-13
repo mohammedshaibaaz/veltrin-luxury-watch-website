@@ -299,47 +299,117 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
+  const name = document.getElementById('name');
+  const email = document.getElementById('email');
+  const watch = document.getElementById('watch');
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+  const watchError = document.getElementById('watch-error');
+  const successMsg = document.getElementById('form-success');
+  const errorMsg = document.getElementById('form-error-message');
+
+  // Function to validate email
+  const validateEmail = (emailValue) => {
+    return emailValue && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+  };
+
+  // Function to show error
+  const showError = (input, errorSpan, message) => {
+    input.classList.add('error');
+    errorSpan.textContent = message;
+    errorSpan.classList.add('show');
+  };
+
+  // Function to clear error
+  const clearError = (input, errorSpan) => {
+    input.classList.remove('error');
+    errorSpan.textContent = '';
+    errorSpan.classList.remove('show');
+  };
+
+  // Real-time validation on blur
+  if (name) {
+    name.addEventListener('blur', function() {
+      if (!this.value.trim()) {
+        showError(this, nameError, '✕ Name is required');
+      } else {
+        clearError(this, nameError);
+      }
+    });
+    name.addEventListener('input', function() {
+      if (this.value.trim() && this.classList.contains('error')) {
+        clearError(this, nameError);
+      }
+    });
+  }
+
+  if (email) {
+    email.addEventListener('blur', function() {
+      if (!this.value) {
+        showError(this, emailError, '✕ Email is required');
+      } else if (!validateEmail(this.value)) {
+        showError(this, emailError, '✕ Enter a valid email (e.g., user@example.com)');
+      } else {
+        clearError(this, emailError);
+      }
+    });
+    email.addEventListener('input', function() {
+      if (validateEmail(this.value) && this.classList.contains('error')) {
+        clearError(this, emailError);
+      }
+    });
+  }
+
+  if (watch) {
+    watch.addEventListener('change', function() {
+      if (this.value) {
+        clearError(this, watchError);
+      }
+    });
+  }
+
+  // Form submission validation
   form.addEventListener('submit', function(e) {
-    // Don't prevent default - let Netlify Forms handle submission
-    // e.preventDefault(); // Removed for Netlify Forms
-    
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const watch = document.getElementById('watch');
-    const nameError = document.getElementById('name-error');
-    const emailError = document.getElementById('email-error');
-    const watchError = document.getElementById('watch-error');
-    const successMsg = document.getElementById('form-success');
-    const errorMsg = document.getElementById('form-error-message');
-    
-    // Reset messages
-    if (nameError) nameError.textContent = '';
-    emailError.textContent = '';
-    watchError.textContent = '';
+    // Reset all messages
     successMsg.style.display = 'none';
     errorMsg.style.display = 'none';
-    
-    // Validate
     let isValid = true;
-    
-    if (name && !name.value.trim()) {
-      nameError.textContent = 'Please enter your name';
+
+    // Validate name
+    if (!name || !name.value.trim()) {
+      showError(name, nameError, '✕ Name is required');
       isValid = false;
+    } else {
+      clearError(name, nameError);
     }
-    
-    if (!email.value || !email.value.includes('@')) {
-      emailError.textContent = 'Please enter a valid email address';
+
+    // Validate email
+    if (!email.value) {
+      showError(email, emailError, '✕ Email is required');
       isValid = false;
+    } else if (!validateEmail(email.value)) {
+      showError(email, emailError, '✕ Enter a valid email address');
+      isValid = false;
+    } else {
+      clearError(email, emailError);
     }
-    
+
+    // Validate watch selection
     if (!watch.value) {
-      watchError.textContent = 'Please select a watch model';
+      showError(watch, watchError, '✕ Please select a watch model');
       isValid = false;
+    } else {
+      clearError(watch, watchError);
     }
-    
+
     if (!isValid) {
       e.preventDefault();
-      errorMsg.style.display = 'block';
+      // Scroll to first error
+      const firstError = form.querySelector('.error');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstError.focus();
+      }
     }
     // If valid, let form submit to Netlify
   });
