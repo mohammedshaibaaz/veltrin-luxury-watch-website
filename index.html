@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VELTRIN | Luxury Watches | Precision-Crafted Timepieces</title>
+<meta name="description" content="Discover VELTRIN luxury watches. Precision-engineered timepieces with timeless design. Explore Nocturne, Eclipse, Vanguard, and Aurum collections.">
+<meta name="keywords" content="luxury watches, precision timepieces, Swiss-inspired watches, craftsmanship, mechanical watches">
+<meta name="theme-color" content="#0b0b0b">
+<meta property="og:title" content="VELTRIN | Precision-Crafted Luxury Watches">
+<meta property="og:description" content="Timeless timepieces shaped with singular focus — precision, restraint, and intention.">
+<meta property="og:image" content="https://veltrin.com/veltrin-hero.jpg">
+<meta property="og:url" content="https://veltrin.com">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<!-- Preconnect to Google Fonts for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<!-- Schema Markup - Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "VELTRIN",
+  "url": "https://veltrin.com",
+  "logo": "https://veltrin.com/logo.png",
+  "description": "Precision-crafted luxury watches with timeless design",
+  "sameAs": ["https://instagram.com/veltrin"]
+}
+</script>
+
+<!-- Schema Markup - Product -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "VELTRIN Luxury Watches",
+  "description": "Precision-engineered timepieces with timeless design",
+  "brand": {
+    "@type": "Brand",
+    "name": "VELTRIN"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "47"
+  }
+}
+</script>
+
+<!-- GSAP -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PLACEHOLDER'); // TODO: Replace G-PLACEHOLDER with your actual GA4 tracking ID from Google Analytics
+  
+  // Track form submission as conversion
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function() {
+        gtag('event', 'form_submission', {
+          'event_category': 'engagement',
+          'event_label': 'contact_form'
+        });
+      });
+    }
+  });
+</script>
+
+<!-- external CSS -->
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<!-- Skip to Main Content Link -->
+<a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="nav-container">
+
+    <div class="nav-brand">VELTRIN</div>
+
+    <!-- Desktop Nav -->
+    <ul class="nav-menu">
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#collection" class="nav-link">Collection</a></li>
+      <li><a href="#craftsmanship" class="nav-link">Craftsmanship</a></li>
+      <li><a href="#footer" class="nav-link">Contact</a></li>
+    </ul>
+
+    <!-- Mobile Hamburger -->
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+
+  </div> <!-- ✅ nav-container ends here -->
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-nav">
+    <a href="#home">Home</a>
+    <a href="#collection">Collection</a>
+    <a href="#craftsmanship">Craftsmanship</a>
+    <a href="#footer">Contact</a>
+  </div>
+
+</nav>
+
+<!-- Main Content -->
+<main id="main-content">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="brand">VELTRIN</div>
+    <h1 class="headline">
+      <span class="headline-1">Precision</span>
+      <span class="headline-2">Refined</span>
+    </h1>
+
+    <!-- editorial CTAs (left-aligned, quiet) -->
+    <div class="hero-ctas">
+      <a href="#collection" class="cta">Explore Collection</a>
+      <a href="#footer" class="cta cta-ghost">Enquire</a>
+    </div>
+
+    <p class="hero-support">Timeless design guided by measured restraint — crafted to endure.</p>
+  </div>
+</section>
+
+<!-- BRAND INTRODUCTION -->
+<section class="brand-intro">
+  <div class="intro-content">
+    <p>VELTRIN is defined by precision, restraint, and intention.</p>
+    <p>Each timepiece is shaped with a singular focus — to express time with clarity and enduring character.</p>
+    <p>In a world of excess, VELTRIN stands apart through disciplined form and purpose.</p>
+    <p>Our watches are created not to follow moments, but to outlast them.</p>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section id="collection" class="collection-section">
+
+  <div class="collection-item active" data-bg="images/nocturne-background.png" data-model="nocturne">
+    <div class="collection-text">
+      <p class="model-name">NOCTURNE</p>
+      <p class="model-desc">Defined by shadow and restraint.</p>
+      <button class="wishlist-btn" aria-label="Add Nocturne to wishlist">♡</button>
+    </div>
+    <div class="image-stack">
+      <img src="images/nocturne-top.jpg" class="active" alt="VELTRIN Nocturne front view" loading="lazy" />
+      <img src="images/nocturne-bottom.png" alt="VELTRIN Nocturne case" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="collection-item" data-bg="images/eclipse-background.png" data-model="eclipse">
+    <div class="collection-text">
+      <p class="model-name">ECLIPSE</p>
+      <p class="model-desc">Time, distilled.</p>
+      <button class="wishlist-btn" aria-label="Add Eclipse to wishlist">♡</button>
+    </div>
+    <div class="image-stack">
+      <img src="images/eclipse-top.jpg" class="active" alt="VELTRIN Eclipse front view" loading="lazy" />
+      <img src="images/eclipse-bottom.png" alt="VELTRIN Eclipse case" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="collection-item" data-bg="images/vanguard-background.png" data-model="vanguard">
+    <div class="collection-text">
+      <p class="model-name">VANGUARD</p>
+      <p class="model-desc">Mechanics revealed with discipline.</p>
+      <button class="wishlist-btn" aria-label="Add Vanguard to wishlist">♡</button>
+    </div>
+    <div class="image-stack">
+      <img src="images/vanguard-top.jpg" class="active" alt="VELTRIN Vanguard front view" loading="lazy" />
+      <img src="images/vanguard-bottom.png" alt="VELTRIN Vanguard case" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="collection-item" data-bg="images/aurum-background.png" data-model="aurum">
+    <div class="collection-text">
+      <p class="model-name">AURUM</p>
+      <p class="model-desc">Crafted warmth, measured precision.</p>
+      <button class="wishlist-btn" aria-label="Add Aurum to wishlist">♡</button>
+    </div>
+    <div class="image-stack">
+      <img src="images/aurum-top.jpg" class="active" alt="VELTRIN Aurum front view" loading="lazy" />
+      <img src="images/aurum-bottom.png" alt="VELTRIN Aurum case" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="collection-item" data-bg="images/monolith-background.png" data-model="monolith">
+    <div class="collection-text">
+      <p class="model-name">MONOLITH</p>
+      <p class="model-desc">Strength, refined into form.</p>
+      <button class="wishlist-btn" aria-label="Add Monolith to wishlist">♡</button>
+    </div>
+    <div class="image-stack">
+      <img src="images/monolith-top.png" class="active" alt="VELTRIN Monolith front view" loading="lazy" />
+      <img src="images/monolith-bottom.png" alt="VELTRIN Monolith case" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="collection-item" data-bg="images/veltrin-background.png" data-model="signature">
+    <div class="collection-text">
+      <p class="model-name">SIGNATURE</p>
+      <p class="model-desc">The pure expression of our philosophy.</p>
+      <button class="wishlist-btn" aria-label="Add Signature to wishlist">♡</button>
+    </div>
+    <div class="image-stack">
+      <img src="images/veltrin-top.png" class="active" alt="VELTRIN Signature front view" loading="lazy" />
+      <img src="images/veltrin-bottom.png" alt="VELTRIN Signature case" loading="lazy" />
+    </div>
+  </div>
+
+</section>
+
+<section id="craftsmanship" class="craftsmanship-section">
+    <!-- 1. PINNED IMAGE BACKGROUND -->
+    <div class="craftsmanship-stage image-stage">
+        <img src="images/craftsmanship-background.png" class="craftsmanship-image">
+    </div>
+    
+    <!-- Overlay text (scrolls over image) -->
+    <div class="craftsmanship-stage text-stage">
+        <div class="craftsmanship-text">
+            <h2 class="craftsmanship-heading">Craftsmanship</h2>
+            <p>The essence of VELTRIN begins long before a watch ever reaches the wrist.</p>
+            <p>In our ateliers, every movement and component is conceived with purpose and scrutinized at every stage of creation. We design not for momentary impression, but for enduring reliability; not for spectacle, but for mechanical truth.</p>
+            <p>Precision is not assumed - it is verified. Each gear, each surface, each tolerance is measured and examined, guided by standards as exacting as those found in the most established manufactories. Every detail is tested not just for performance in isolation, but for harmony within the whole.</p>
+            <p>Here, craftsmanship is not a claim - it is a methodical discipline, rooted in meticulous work, deep expertise, and thoughtful restraint.</p>
+          </div>
+        </div>
+  </section>
+  <section class="craftsmanship-video-section">
+    <video src="images/craftsmanship-video.mp4" class="craftsmanship-video" autoplay muted loop playsinline preload="metadata" loading="lazy"></video>
+</section>
+
+<!-- TRUST SIGNALS SECTION -->
+<section class="trust-section">
+  <div class="trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      <h3>Patent Pending Innovation</h3>
+      <p>Proprietary movement design</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">⚙</div>
+      <h3>Swiss-Inspired Precision</h3>
+      <p>±5 seconds/month accuracy</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🛡</div>
+      <h3>10-Year Warranty</h3>
+      <p>Crafted to endure</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🌍</div>
+      <h3>Global Shipping</h3>
+      <p>Tracked & insured</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section">
+  <h2>Frequently Asked</h2>
+  
+  <div class="faq-search">
+    <input type="text" id="faq-search" placeholder="Search questions..." aria-label="Search FAQ">
+  </div>
+  
+  <div class="faq-list">
+    <details>
+      <summary>What materials are used in VELTRIN watches?</summary>
+      <p>Each model uses carefully selected materials: 316L stainless steel cases, sapphire crystal, premium leather or metal bands. Full specifications available on each product page.</p>
+    </details>
+    
+    <details>
+      <summary>How accurate are VELTRIN watches?</summary>
+      <p>Our automatic movements maintain ±5 seconds per month accuracy, verified through our rigorous testing protocols.</p>
+    </details>
+    
+    <details>
+      <summary>What is the warranty?</summary>
+      <p>All VELTRIN watches come with a 10-year warranty covering manufacturing defects. Movement servicing available every 5 years.</p>
+    </details>
+    
+    <details>
+      <summary>How long is the wait time for delivery?</summary>
+      <p>Standard orders ship within 2-4 weeks. Made-to-order customizations: 6-8 weeks.</p>
+    </details>
+  </div>
+</section>
+
+
+
+
+
+<!-- CONTACT FORM SECTION -->
+<section class="contact-section" id="footer">
+  <h2>Get In Touch</h2>
+  <p>Interested in a VELTRIN timepiece? We'll respond within 24 hours.</p>
+  
+  <form class="contact-form" id="contact-form" name="contact" method="POST" netlify netlify-honeypot="bot-field">
+    <!-- Honeypot field for spam protection -->
+    <input type="hidden" name="bot-field" />
+    
+    <div class="form-group">
+      <label for="name">Name <span aria-label="required">*</span></label>
+      <input type="text" id="name" name="name" required placeholder="Your name" aria-required="true">
+      <span class="form-error" id="name-error"></span>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email Address <span aria-label="required">*</span></label>
+      <input type="email" id="email" name="email" required placeholder="your@email.com" aria-required="true">
+      <span class="form-error" id="email-error"></span>
+    </div>
+    
+    <div class="form-group">
+      <label for="watch">Interested In <span aria-label="required">*</span></label>
+      <select id="watch" name="watch" required aria-required="true">
+        <option value="">Select a model</option>
+        <option value="nocturne">Nocturne</option>
+        <option value="eclipse">Eclipse</option>
+        <option value="vanguard">Vanguard</option>
+        <option value="aurum">Aurum</option>
+        <option value="monolith">Monolith</option>
+        <option value="signature">Signature</option>
+      </select>
+      <span class="form-error" id="watch-error"></span>
+    </div>
+    
+    <div class="form-group">
+      <label for="message">Message (optional)</label>
+      <textarea id="message" name="message" placeholder="Tell us about your interest..."></textarea>
+    </div>
+    
+    <button type="submit" class="btn-submit">Request Information</button>
+    <p class="form-note">We'll respond within 24 hours</p>
+    
+    <!-- Success/Error messages -->
+    <div class="form-success" id="form-success" style="display: none;">
+      ✓ Thank you! We'll be in touch within 24 hours.
+    </div>
+    <div class="form-error-message" id="form-error-message" style="display: none;">
+      Please fill in all required fields correctly.
+    </div>
+  </form>
+</section>
+
+<!-- NEWSLETTER SECTION -->
+<section class="newsletter-section">
+  <h2>Stay Updated</h2>
+  <p>Be the first to know about new collections and exclusive offers.</p>
+  
+  <form class="newsletter-form" id="newsletter-form">
+    <div class="newsletter-input-group">
+      <input type="email" id="newsletter-email" placeholder="Enter your email" required aria-label="Email for newsletter">
+      <button type="submit" class="btn-newsletter">Subscribe</button>
+    </div>
+    
+    <div class="newsletter-success" id="newsletter-success" style="display: none;">
+      ✓ Thank you for subscribing!
+    </div>
+    <div class="newsletter-error" id="newsletter-error" style="display: none;">
+      Please enter a valid email address.
+    </div>
+  </form>
+</section>
+
+<!-- FOOTER LINKS SECTION -->
+<section class="footer-links-section">
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      VELTRIN
+    </div>
+
+    <nav class="footer-nav">
+      <a href="#home">Home</a>
+      <a href="#collection">Collection</a>
+      <a href="#craftsmanship">Craftsmanship</a>
+      <a href="#footer">Contact</a>
+    </nav>
+
+    <div class="footer-legal">
+      <span class="demo-notice">Demo Project</span>
+      <span>© VELTRIN 2025</span>
+      <span>Patent Pending</span>
+    </div>
+
+    <div class="footer-meta">
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#terms">Terms & Conditions</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="final-emotion-section">
+  <video class="final-video" autoplay muted loop playsinline loading="lazy">
+    <source src="images/footer-video.mp4" type="video/mp4" />
+  </video>
+
+  <div class="final-overlay"></div>
+
+  <div class="final-content">
+    <div class="final-brand">VELTRIN</div>
+
+    <p class="final-text">
+      Time is not followed.<br />
+      It is carried forward.
+    </p>
+
+    <div class="final-meta">
+      Patent Pending
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- external JS -->
+<script src="scr.js"></script>
+</body>
+</html>

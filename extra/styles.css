@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VELTRIN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pangaia:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Neue+Montreal+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+<style>
+/* ---------------- RESET ---------------- */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #0b0b0b;
+  color: #e6e2d8;
+  font-family: 'Neue Montreal Mono', monospace;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* ---------------- NAVIGATION ---------------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  z-index: 1000;
+  padding: 20px 8vw;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  font-family: 'Cinzel', serif;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+.nav-menu a {
+  color: #e6e2d8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: #c9a24d;
+}
+
+.brand {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+}
+
+/* ---------------- BRAND INTRODUCTION ---------------- */
+.brand-intro {
+  padding: 120px 8vw 80px;
+  background: #000;
+}
+
+.intro-content {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: left;
+  color: #8c857a;
+  font-family: 'Pangaia', serif;
+  font-weight: 400;
+  line-height: 1.6;
+  opacity: 0;
+}
+
+.intro-content p {
+  margin-bottom: 1.5em;
+}
+
+/* ---------------- HERO ---------------- */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  
+  background: #0b0b0b url('nc.png') center/cover no-repeat;
+  
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 36%;
+  padding-left: 8vw;
+}
+
+.hero-text .brand {
+  font-size: 0.9rem;
+  letter-spacing: 0.5em;
+  opacity: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+.hero-text .headline {
+  margin-top: 14px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ---------------- SECTIONS ---------------- */
+section {
+  padding: 120px 8vw;
+  scroll-margin-top: 100px;
+}
+
+.section-text {
+  max-width: 680px;
+  color: #8c857a;
+  font-size: 1rem;
+}
+
+/* ---------------- MEDIA SCROLL ---------------- */
+.media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.media img,
+.media video {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  box-shadow: 0 1.875rem 5rem rgba(0,0,0,0.6);
+  border: 1px solid rgba(201, 162, 77, 0.35);
+}
+
+/* ---------------- COLLECTION ---------------- */
+.collection {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 1.2s ease;
+}
+
+.collection-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.collection img {
+  width: 360px;
+  height: 520px;
+  object-fit: cover;
+  opacity: 0;
+  box-shadow: 0 1.875rem 5rem rgba(0,0,0,0.6);
+  border: 1px solid rgba(201, 162, 77, 0.35);
+}
+
+.model-name {
+  font-size: 1.4rem;
+  letter-spacing: 0.22em;
+  opacity: 0;
+  font-family: 'Pangaia', serif;
+}
+
+/* ---------------- FOOTER ---------------- */
+.footer-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-section video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.footer-content {
+  text-align: center;
+  color: #e6e2d8;
+}
+
+.footer-links {
+  margin-bottom: 40px;
+}
+
+.footer-links a {
+  color: #e6e2d8;
+  text-decoration: none;
+  margin: 0 20px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #c9a24d;
+}
+
+.footer-content img {
+  width: 200px;
+  margin: 20px 0;
+}
+
+.patent {
+  font-size: 0.8rem;
+  color: #8c857a;
+  margin: 10px 0;
+}
+
+.emotional-message {
+  font-size: 1.2rem;
+  font-family: 'Pangaia', serif;
+  margin-top: 20px;
+}
+
+/* ---------------- MOBILE ---------------- */
+@media (max-width: 900px) {
+  .hero-text {
+    max-width: 90%;
+    position: absolute;
+    top: 20%;
+    left: 8vw;
+  }
+
+  .media {
+    grid-template-columns: 1fr;
+  }
+
+  .media img,
+  .media video {
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.6);
+  }
+
+  .collection-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .collection img {
+    width: 90%;
+    height: 420px;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.6);
+  }
+
+  .nav-menu {
+    gap: 20px;
+  }
+
+  .nav-menu a {
+    font-size: 0.8rem;
+  }
+
+  .footer-links a {
+    margin: 0 10px;
+    font-size: 0.8rem;
+  }
+
+  .footer-content img {
+    width: 150px;
+  }
+
+  .emotional-message {
+    font-size: 1rem;
+  }
+
+  .brand-intro {
+    padding: 80px 8vw 60px;
+  }
+
+  .intro-content {
+    text-align: center;
+    max-width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">VELTRIN</div>
+    <ul class="nav-menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#engineering">Engineering</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="brand">VELTRIN</div>
+    <div class="headline">Precision, refined.</div>
+  </div>
+</section>
+
+<!-- BRAND INTRODUCTION -->
+<section class="brand-intro">
+  <div class="intro-content">
+    <p>VELTRIN is defined by precision, restraint, and intention.</p>
+    <p>Each timepiece is designed with a singular focus — to express time with clarity and enduring character.</p>
+    <p>In a world of excess, VELTRIN stands apart through discipline of form and purpose.</p>
+    <p>Our watches are created not to follow moments, but to outlast them.</p>
+  </div>
+</section>
+
+<!-- MEDIA -->
+<section class="media">
+  <img class="fade-media" src="watch-detail.jpg" />
+  <video class="fade-media" src="movement.mp4" autoplay muted loop playsinline></video>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection" id="collection">
+  <div class="collection-inner">
+    <img id="leftImg" />
+    <div class="model-name" id="modelName"></div>
+    <img id="rightImg" />
+  </div>
+</section>
+
+<!-- ENGINEERING -->
+<section class="fade-section" id="engineering">
+  <p class="section-text">
+    Precision engineering meets timeless design. Every VELTRIN watch is crafted with Swiss movement technology and innovative materials for unparalleled accuracy and durability.
+  </p>
+</section>
+
+<section id="contact" class="footer-section">
+  <video src="footer-video.mp4" autoplay muted loop playsinline></video>
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+    <img src="footer-image.jpg" alt="VELTRIN" />
+    <p class="patent">Patent Pending</p>
+    <p class="emotional-message">Designed to endure. Built to remain.</p>
+  </div>
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+const isMobile = window.innerWidth < 900;
+
+/* ---------------- HERO TEXT ---------------- */
+gsap.to(".brand", {
+  opacity: 1,
+  delay: isMobile ? 0.5 : 0.8,
+  duration: isMobile ? 1.0 : 1.2,
+  ease: "power2.out"
+});
+
+gsap.to(".headline", {
+  opacity: 1,
+  letterSpacing: isMobile ? "0.12em" : "0.15em",
+  delay: isMobile ? 1.5 : 2,
+  duration: isMobile ? 1.2 : 1.4,
+  ease: "power2.out"
+});
+
+/* ---------------- FADE SECTIONS ---------------- */
+gsap.utils.toArray(".fade-section").forEach(section => {
+  gsap.fromTo(section,
+    { opacity: 0, y: 60 },
+    {
+      opacity: 1,
+      y: 0,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        end: "top 30%",
+        scrub: true
+      }
+    }
+  );
+});
+
+/* ---------------- BRAND INTRODUCTION ---------------- */
+gsap.fromTo(".intro-content",
+  { opacity: 0, y: 10 },
+  {
+    opacity: 1,
+    y: 0,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".brand-intro",
+      start: "top 80%",
+      end: "bottom 20%",
+      scrub: true
+    }
+  }
+);
+
+/* ---------------- MEDIA REVEAL ---------------- */
+gsap.utils.toArray(".fade-media").forEach(media => {
+  gsap.fromTo(media,
+    { opacity: 0, scale: 0.96 },
+    {
+      opacity: 1,
+      scale: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: media,
+        start: "top 85%",
+        end: "top 40%",
+        scrub: true
+      }
+    }
+  );
+});
+
+/* ---------------- COLLECTION MODELS ---------------- */
+const models = [
+  {
+    name: "ORIGIN",
+    bg: "#050505",
+    left: "origin-left.jpg",
+    right: "origin-right.jpg"
+  },
+  {
+    name: "AXIS",
+    bg: "#0a0a0a",
+    left: "axis-left.jpg",
+    right: "axis-right.jpg"
+  },
+  {
+    name: "NOIR",
+    bg: "#000000",
+    left: "noir-left.jpg",
+    right: "noir-right.jpg"
+  }
+];
+
+const leftImg = document.getElementById("leftImg");
+const rightImg = document.getElementById("rightImg");
+const modelName = document.getElementById("modelName");
+const collection = document.querySelector(".collection");
+
+let index = 0;
+
+function showModel(i) {
+  const m = models[i];
+
+  gsap.to([leftImg, rightImg, modelName], { opacity: 0, duration: 0.6 });
+
+  setTimeout(() => {
+    leftImg.src = m.left;
+    rightImg.src = m.right;
+    modelName.textContent = m.name;
+    collection.style.background = m.bg;
+
+    gsap.to([leftImg, rightImg], { opacity: 1, duration: 1 });
+    gsap.to(modelName, { opacity: 1, duration: 1, delay: 0.2 });
+  }, 600);
+}
+
+/* Scroll-linked model change */
+ScrollTrigger.create({
+  trigger: ".collection",
+  start: "top center",
+  end: "bottom center",
+  scrub: true,
+  onUpdate: self => {
+    const newIndex = Math.floor(self.progress * models.length);
+    if (newIndex !== index && models[newIndex]) {
+      index = newIndex;
+      showModel(index);
+    }
+  }
+});
+
+/* Initial model */
+showModel(0);
+
+/* ---------------- SMOOTH SCROLL ---------------- */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+/* ---------------- FOOTER FADE ---------------- */
+gsap.fromTo(".footer-section",
+  { opacity: 0, y: 30 },
+  {
+    opacity: 1,
+    y: 0,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".footer-section",
+      start: "top 90%",
+      end: "top 60%",
+      scrub: true
+    }
+  }
+);
+</script>
+
+</body>
+</html>
