@@ -294,39 +294,220 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// ===================== FAQ FUNCTIONALITY =====================
+document.addEventListener('DOMContentLoaded', function() {
+  // FAQ Accordion
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  const faqSearch = document.getElementById('faq-search');
 
-const craftsmanshipVideo = document.querySelector(".craftsmanship-video");
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      const isVisible = answer.style.display !== 'none';
+      
+      // Close all other answers
+      document.querySelectorAll('.faq-answer').forEach(a => {
+        a.style.display = 'none';
+      });
+      
+      // Toggle current answer
+      answer.style.display = isVisible ? 'none' : 'block';
+    });
+  });
 
-const observer = new IntersectionObserver(
-  ([entry]) => {
-    if (entry.isIntersecting) {
-      craftsmanshipVideo.play();
-      craftsmanshipVideo.style.opacity = "1";
+  // FAQ Search
+  if (faqSearch) {
+    faqSearch.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question').textContent.toLowerCase();
+        if (question.includes(searchTerm)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  }
+});
+
+// ===================== ADVANCED FORM VALIDATION & SUBMISSION =====================
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const name = document.getElementById('name');
+  const email = document.getElementById('email');
+  const model = document.getElementById('model');
+  const message = document.getElementById('message');
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+  const modelError = document.getElementById('model-error');
+  const messageError = document.getElementById('message-error');
+  const successMsg = document.getElementById('form-success');
+  const errorMsg = document.getElementById('form-error-message');
+
+  // Function to validate email
+  const validateEmail = (emailValue) => {
+    return emailValue && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+  };
+
+  // Function to show error
+  const showError = (input, errorSpan, message) => {
+    input.classList.add('error');
+    errorSpan.textContent = message;
+    errorSpan.classList.add('show');
+  };
+
+  // Function to clear error
+  const clearError = (input, errorSpan) => {
+    input.classList.remove('error');
+    errorSpan.textContent = '';
+    errorSpan.classList.remove('show');
+  };
+
+  // Real-time validation on blur for Name field
+  if (name) {
+    name.addEventListener('blur', function() {
+      if (!this.value.trim()) {
+        showError(this, nameError, 'Please provide your name');
+      } else {
+        clearError(this, nameError);
+      }
+    });
+    name.addEventListener('input', function() {
+      if (this.value.trim() && this.classList.contains('error')) {
+        clearError(this, nameError);
+      }
+    });
+  }
+
+  // Real-time validation on blur for Email field
+  if (email) {
+    email.addEventListener('blur', function() {
+      if (!this.value) {
+        showError(this, emailError, 'Email address is required');
+      } else if (!validateEmail(this.value)) {
+        showError(this, emailError, 'Please enter a valid email address');
+      } else {
+        clearError(this, emailError);
+      }
+    });
+    email.addEventListener('input', function() {
+      if (validateEmail(this.value) && this.classList.contains('error')) {
+        clearError(this, emailError);
+      }
+    });
+  }
+
+  // Real-time validation for dropdown/select field
+  if (model) {
+    model.addEventListener('change', function() {
+      if (this.value) {
+        clearError(this, modelError);
+      }
+    });
+  }
+
+  // Form submission validation
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Reset all messages
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+    let isValid = true;
+
+    // Validate name
+    if (!name || !name.value.trim()) {
+      showError(name, nameError, 'Please provide your name');
+      isValid = false;
     } else {
-      craftsmanshipVideo.pause();
-      craftsmanshipVideo.style.opacity = "0";
+      clearError(name, nameError);
     }
-  },
-  { threshold: 0.4 }
-);
 
-observer.observe(craftsmanshipVideo);
-
-
-const footerVideo = document.querySelector(".final-video");
-
-const footerObserver = new IntersectionObserver(
-  ([entry]) => {
-    if (entry.isIntersecting) {
-      footerVideo.play();
-      footerVideo.style.opacity = "1";
+    // Validate email
+    if (!email.value) {
+      showError(email, emailError, 'Email address is required');
+      isValid = false;
+    } else if (!validateEmail(email.value)) {
+      showError(email, emailError, 'Please enter a valid email address');
+      isValid = false;
     } else {
-      footerVideo.pause();
-      footerVideo.style.opacity = "0";
+      clearError(email, emailError);
     }
-  },
-  { threshold: 0.35 }
-);
 
-footerObserver.observe(footerVideo);
+    // Validate model selection
+    if (!model.value) {
+      showError(model, modelError, 'Please select a timepiece');
+      isValid = false;
+    } else {
+      clearError(model, modelError);
+    }
 
+    if (!isValid) {
+      errorMsg.style.display = 'block';
+      // Scroll to first error
+      const firstError = form.querySelector('.error');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstError.focus();
+      }
+    } else {
+      // Submit to Netlify (AJAX) so submissions appear in the dashboard
+      const formData = new FormData(form);
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+        .then(() => {
+          successMsg.style.display = 'block';
+          form.reset();
+
+          // Clear any remaining error states
+          form.querySelectorAll('input, select, textarea').forEach(field => {
+            field.classList.remove('error');
+          });
+          form.querySelectorAll('.form-error').forEach(error => {
+            error.classList.remove('show');
+            error.textContent = '';
+          });
+        })
+        .catch(() => {
+          errorMsg.textContent = 'Submission failed. Please try again.';
+          errorMsg.style.display = 'block';
+        });
+    }
+  });
+});
+
+// ===================== NEWSLETTER SUBSCRIPTION =====================
+document.addEventListener('DOMContentLoaded', function() {
+  const newsletterForm = document.querySelector('.newsletter-form');
+  
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const emailField = this.querySelector('input[type="email"]');
+      if (!emailField || !emailField.value) return;
+
+      const formData = new FormData(this);
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+        .then(() => {
+          alert('Thank you for subscribing! Check your email for confirmation.');
+          this.reset();
+        })
+        .catch(() => {
+          alert('Subscription failed. Please try again.');
+        });
+    });
+  }
+});

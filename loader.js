@@ -11,18 +11,21 @@
 
   // Track all images
   function initializeLoader() {
-    const allImages = document.querySelectorAll('img, video');
+    // Wait for all images including background images
+    const allImages = document.querySelectorAll('img');
+    const allVideos = document.querySelectorAll('video');
     let loadedCount = 0;
-    let totalCount = allImages.length || 1;
+    let totalCount = allImages.length + allVideos.length;
     let fakeProgress = 0;
+    let allImagesLoaded = false;
 
-    // Simulate fake progress while waiting for real loading
+    // Smooth fake progress animation
     const fakeProgressInterval = setInterval(() => {
-      if (fakeProgress < 85) {
-        fakeProgress += Math.random() * 25;
-        updateProgress(Math.min(fakeProgress, 85));
+      if (fakeProgress < 70) {
+        fakeProgress += Math.random() * 3 + 1; // Smaller increments for smoother animation
+        updateProgress(Math.min(fakeProgress, 70));
       }
-    }, 400);
+    }, 150); // More frequent updates for smoother animation
 
     function updateProgress(percentage) {
       if (progressBar) {
@@ -31,7 +34,7 @@
     }
 
     function checkIfAllLoaded() {
-      if (loadedCount >= totalCount) {
+      if (loadedCount >= totalCount && allImagesLoaded) {
         clearInterval(fakeProgressInterval);
         updateProgress(100);
         return true;
@@ -41,43 +44,52 @@
 
     // Track image loads
     allImages.forEach((img) => {
-      if (img.tagName === 'IMG') {
-        if (img.complete) {
+      if (img.complete && img.naturalHeight !== 0) {
+        loadedCount++;
+      } else {
+        img.addEventListener('load', () => {
           loadedCount++;
-        } else {
-          img.addEventListener('load', () => {
-            loadedCount++;
-            const realProgress = (loadedCount / totalCount) * 85;
-            updateProgress(Math.max(fakeProgress, realProgress));
-            if (checkIfAllLoaded()) setTimeout(closeLoader, 500);
-          });
-          img.addEventListener('error', () => {
-            loadedCount++;
-            if (checkIfAllLoaded()) setTimeout(closeLoader, 500);
-          });
-        }
-      } else if (img.tagName === 'VIDEO') {
-        img.addEventListener('loadeddata', () => {
-          loadedCount++;
-          const realProgress = (loadedCount / totalCount) * 85;
+          const realProgress = (loadedCount / totalCount) * 95;
           updateProgress(Math.max(fakeProgress, realProgress));
-          if (checkIfAllLoaded()) setTimeout(closeLoader, 500);
+          if (checkIfAllLoaded()) setTimeout(closeLoader, 1000);
+        });
+        img.addEventListener('error', () => {
+          loadedCount++;
+          if (checkIfAllLoaded()) setTimeout(closeLoader, 1000);
         });
       }
     });
 
-    // If no images, close after minimum time
-    if (totalCount === 0) {
-      setTimeout(closeLoader, 2000);
-    }
+    // Track video loads
+    allVideos.forEach((video) => {
+      if (video.readyState >= 3) {
+        loadedCount++;
+      } else {
+        video.addEventListener('loadeddata', () => {
+          loadedCount++;
+          const realProgress = (loadedCount / totalCount) * 95;
+          updateProgress(Math.max(fakeProgress, realProgress));
+          if (checkIfAllLoaded()) setTimeout(closeLoader, 1000);
+        });
+      }
+    });
 
-    // Fallback timeout (max 6 seconds)
+    // Wait for window.load event to ensure everything is ready
+    window.addEventListener('load', () => {
+      allImagesLoaded = true;
+      if (checkIfAllLoaded()) {
+        setTimeout(closeLoader, 1000);
+      }
+    });
+
+    // Fallback timeout increased to 15 seconds for slower connections
     setTimeout(() => {
       if (loaderWrapper && loaderWrapper.style.display !== 'none') {
+        allImagesLoaded = true;
         updateProgress(100);
-        setTimeout(closeLoader, 300);
+        setTimeout(closeLoader, 500);
       }
-    }, 6000);
+    }, 15000);
 
     // GSAP Animation Timeline
     const tl = gsap.timeline();
