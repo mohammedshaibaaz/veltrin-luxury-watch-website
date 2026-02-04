@@ -17,9 +17,32 @@
 
 <!-- external CSS -->
 <link rel="stylesheet" href="style.css">
+
+<!-- Loader Script -->
+<script src="loader.js" defer></script>
 </head>
 
 <body>
+<!-- LOADER -->
+<div id="loader-wrapper">
+  <div class="shutter left"></div>
+  <div class="shutter right"></div>
+
+  <div class="logo-container">
+    <div class="logo-text" id="logo">
+      <span class="letter">V</span>
+      <span class="letter">E</span>
+      <span class="letter">L</span>
+      <span class="letter">T</span>
+      <span class="letter">R</span>
+      <span class="letter">I</span>
+      <span class="letter">N</span>
+    </div>
+    <div class="loading-text" id="loading-text">Excellence takes a moment.</div>
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+</div>
+
 <nav class="navbar" aria-label="Main navigation">
   <div class="nav-container">
 
@@ -86,70 +109,69 @@
 <!-- COLLECTION -->
 <section id="collection" class="collection-section">
 
-  <div class="collection-item active" data-bg="nocturne-background.png">
+  <div class="collection-item active" data-bg="nocturne-background.webp">
     <div class="collection-text">
       <p class="model-name">NOCTURNE</p>
       <p class="model-desc">Defined by shadow and restraint.</p>
     </div>
     <div class="image-stack">
-      <img src="nocturne-top.jpg" class="active" loading="lazy" alt="VELTRIN Nocturne front view" />
-      <img src="nocturne-bottom.png" loading="lazy" alt="VELTRIN Nocturne case" />
+      <img src="nocturne-top.webp" class="active" loading="eager" alt="VELTRIN Nocturne front view" />
+      <img src="nocturne-bottom.webp" loading="eager" alt="VELTRIN Nocturne case" />
     </div>
   </div>
 
-  <div class="collection-item" data-bg="eclipse-background
-  .png">
+  <div class="collection-item" data-bg="eclipse-background.webp">
     <div class="collection-text">
       <p class="model-name">ECLIPSE</p>
       <p class="model-desc">Time, distilled.</p>
     </div>
     <div class="image-stack">
-      <img src="eclipse-top.jpg" class="active" loading="lazy" alt="VELTRIN Eclipse front view" />
-      <img src="eclipse-bottom.png" loading="lazy" alt="VELTRIN Eclipse case" />
+      <img src="eclipse-top.webp" class="active" loading="eager" alt="VELTRIN Eclipse front view" />
+      <img src="eclipse-bottom.webp" loading="eager" alt="VELTRIN Eclipse case" />
     </div>
   </div>
 
-  <div class="collection-item" data-bg="vanguard-background.png">
+  <div class="collection-item" data-bg="vanguard-background.webp">
     <div class="collection-text">
       <p class="model-name">VANGUARD</p>
       <p class="model-desc">Mechanics revealed with discipline.</p>
     </div>
     <div class="image-stack">
-      <img src="vanguard-top.jpg" class="active"  loading="lazy" alt="VELTRIN Vanguard front view" />
-      <img src="vanguard-bottom.png"  loading="lazy" alt="VELTRIN Vanguard case" />
+      <img src="vanguard-top.webp" class="active" loading="eager" alt="VELTRIN Vanguard front view" />
+      <img src="vanguard-bottom.webp" loading="eager" alt="VELTRIN Vanguard case" />
     </div>
   </div>
 
-  <div class="collection-item" data-bg="aurum-background.png">
+  <div class="collection-item" data-bg="aurum-background.webp">
     <div class="collection-text">
       <p class="model-name">AURUM</p>
       <p class="model-desc">Crafted warmth, measured precision.</p>
     </div>
     <div class="image-stack">
-      <img src="aurum-top.jpg" class="active" loading="lazy" alt="VELTRIN Aurum front view" />
-      <img src="aurum-bottom.png" loading="lazy" alt="VELTRIN Aurum case" />
+      <img src="aurum-top.webp" class="active" loading="eager" alt="VELTRIN Aurum front view" />
+      <img src="aurum-bottom.webp" loading="eager" alt="VELTRIN Aurum case" />
     </div>
   </div>
 
-  <div class="collection-item" data-bg="monolith-background.png">
+  <div class="collection-item" data-bg="monolith-background.webp">
     <div class="collection-text">
       <p class="model-name">MONOLITH</p>
       <p class="model-desc">Strength, refined into form.</p>
     </div>
     <div class="image-stack">
-      <img src="monolith-top.png" class="active" loading="lazy" alt="VELTRIN Monolith front view" />
-      <img src="monolith-bottom.png" loading="lazy" alt="VELTRIN Monolith case" />
+      <img src="monolith-top.webp" class="active" loading="eager" alt="VELTRIN Monolith front view" />
+      <img src="monolith-bottom.webp" loading="eager" alt="VELTRIN Monolith case" />
     </div>
   </div>
 
-  <div class="collection-item" data-bg="veltrin-background.png">
+  <div class="collection-item" data-bg="veltrin-background.webp">
     <div class="collection-text">
       <p class="model-name">SIGNATURE</p>
       <p class="model-desc">The pure expression of our philosophy.</p>
     </div>
     <div class="image-stack">
-      <img src="veltrin-top.png" class="active" loading="lazy" alt="VELTRIN Signature front view" />
-      <img src="veltrin-bottom.png" loading="lazy" alt="VELTRIN Signature case" />
+      <img src="veltrin-top.webp" class="active" loading="eager" alt="VELTRIN Signature front view" />
+      <img src="veltrin-bottom.webp" loading="eager" alt="VELTRIN Signature case" />
     </div>
   </div>
 
@@ -162,7 +184,7 @@
 <section id="craftsmanship" class="craftsmanship-section">
     <!-- 1. PINNED IMAGE BACKGROUND -->
     <div class="craftsmanship-stage image-stage">
-        <img src="craftsmanship-background.png" loading="lazy" class="craftsmanship-image">
+        <img src="craftsmanship-background.webp" loading="lazy" class="craftsmanship-image">
     </div>
     
     <!-- 2. BLACK OVERLAY TEXT (scrolls over image) -->
@@ -188,7 +210,7 @@
   loop
   playsinline
   preload="none"
-  poster="./craftsmanship-background.png"
+  poster="./craftsmanship-background.webp"
 >
   <source src="craftsmanship-video.webm" type="video/webm">
   <source src="craftsmanship-video.mp4" type="video/mp4">
@@ -235,9 +257,8 @@
   loop
   playsinline
   preload="none"
-  poster="./signature-background.png"
+  poster="./veltrin-background.webp"
 >
-  <source src="footer-video.webm" type="video/webm">
   <source src="footer-video.mp4" type="video/mp4">
 </video>
 
