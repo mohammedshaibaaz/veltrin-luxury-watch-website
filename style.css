@@ -864,8 +864,8 @@ section {
 }
 
 
-.hero{
-  padding: 0 !important;
+.hero {
+  background: #0b0b0b url('hero-background.webp') center / cover no-repeat;
 }
 
 /* ===================== FEATURES SECTION ===================== */
